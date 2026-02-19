@@ -1,132 +1,168 @@
 #!/usr/bin/env python3
 """
-Simple build script to create a standalone .app bundle for Liquid Glass Demo
-and package it into a .dmg using hdiutil.
+Tayberry Backup Studio — macOS App Builder
 
-Author: Amirhosein Rezapour | techili.ir
+Creates a native .app bundle WITHOUT PyInstaller.
+The bundle uses a shell-script launcher that calls the system Python3,
+which avoids all segfault/library-conflict issues that PyInstaller
+has with PyQt6 on macOS with Xcode Python.
+
+Usage:
+    python3 build_mac_app.py              # build only → dist/
+    python3 build_mac_app.py --install    # build + install to /Applications
+    python3 build_mac_app.py --dmg        # build + create DMG
+
+Author: Amirhosein Rezapour | techili.ir | tayberry.dev
 """
 
-import os
-import sys
-import shutil
-import subprocess
+from __future__ import annotations
+import os, sys, shutil, subprocess, argparse
+from pathlib import Path
 
-def create_dmg(app_path):
-    """Create a DMG from the .app bundle."""
-    dmg_name = "TayberryBackupStudio.dmg"
-    print(f"Creating {dmg_name}...")
-    
-    # Create a temporary folder to prepare the DMG content
-    dmg_source = "dmg_source"
-    if os.path.exists(dmg_source):
-        shutil.rmtree(dmg_source)
-    os.makedirs(dmg_source)
-    
-    # Copy the .app to the source folder
-    app_base_name = os.path.basename(app_path)
-    shutil.copytree(app_path, os.path.join(dmg_source, app_base_name))
-    
-    # Create a symlink to /Applications
-    os.symlink("/Applications", os.path.join(dmg_source, "Applications"))
-    
-    # Remove existing DMG
-    if os.path.exists(dmg_name):
-        os.remove(dmg_name)
-    
-    # Run hdiutil (macOS specific)
-    try:
-        subprocess.check_call([
-            "hdiutil", "create",
-            "-volname", "Tayberry Backup Studio Installer",
-            "-srcfolder", dmg_source,
-            "-ov",
-            "-format", "UDZO",
-            dmg_name
-        ])
-        print(f"DMG created at {os.path.abspath(dmg_name)}")
-    except FileNotFoundError:
-        print("Warning: hdiutil not found. DMG can only be created on macOS.")
-    except Exception as e:
-        print(f"Warning: Failed to create DMG: {e}")
-    finally:
-        # Cleanup
-        if os.path.exists(dmg_source):
-            shutil.rmtree(dmg_source)
+# ─────────────────────────── Config ───────────────────────────── #
+APP_NAME       = "Tayberry Backup Studio"
+APP_BUNDLE     = f"{APP_NAME}.app"
+BUNDLE_ID      = "dev.tayberry.backup-studio"
+APP_VERSION    = "1.0.0"
+EXECUTABLE     = "TayberryBackupStudio"
+PYTHON_BIN     = "/usr/bin/python3"   # system Python — always present on macOS
+MODULE         = "app_src.main"
+# ──────────────────────────────────────────────────────────────── #
+
+ROOT   = Path(__file__).parent
+DIST   = ROOT / "dist"
+BUNDLE = DIST / APP_BUNDLE
+
+
+def clean():
+    if BUNDLE.exists():
+        shutil.rmtree(BUNDLE)
+    DIST.mkdir(exist_ok=True)
+
 
 def build():
-    # Ensure dependencies
-    try:
-        import PyInstaller
-    except ImportError:
-        print("Error: PyInstaller is not installed.")
-        print("Please run: pip install pyinstaller")
-        sys.exit(1)
+    print(f"Building {APP_BUNDLE} ...")
 
-    print("Building Tayberry Backup Studio.app...")
-    
-    # Clean previous builds
-    if os.path.exists("dist"):
-        shutil.rmtree("dist")
-    if os.path.exists("build"):
-        shutil.rmtree("build")
+    # Directory structure
+    macos_dir     = BUNDLE / "Contents" / "MacOS"
+    resources_dir = BUNDLE / "Contents" / "Resources"
+    macos_dir.mkdir(parents=True)
+    resources_dir.mkdir(parents=True)
 
-    # Entry point
-    main_script = os.path.join("app", "main.py")
-    
-    # Check if entry point exists
-    if not os.path.exists(main_script):
-        print(f"Error: {main_script} does not exist.")
-        sys.exit(1)
-        
-    # Resources
-    resources_path = os.path.join("app", "resources")
-    icon_path = os.path.join(resources_path, "icon.icns")
-    
-    # PyInstaller arguments
-    cmd = [
-        sys.executable,
-        "-m",
-        "PyInstaller",
-        "--noconfirm",
-        "--clean",
-        "--windowed",  # No console window
-        "--name", "Tayberry Backup Studio",
-        "--add-data", f"{resources_path}:app/resources",  # Include resources folder
-        "--hidden-import", "PyQt6.QtCore",
-        "--hidden-import", "PyQt6.QtGui",
-        "--hidden-import", "PyQt6.QtWidgets",
-        "--hidden-import", "app.backup_core.engine",
-        "--hidden-import", "app.backup_core.config",
-        "--hidden-import", "app.backup_core.scanning",
-        "--hidden-import", "app.backup_core.steps.api_bundles",
-        "--hidden-import", "app.backup_core.steps.code_bundles",
-        "--hidden-import", "app.backup_core.steps.configs",
-        "--hidden-import", "app.backup_core.steps.paths",
-        "--hidden-import", "app.backup_core.steps.root_files",
-        "--hidden-import", "app.backup_core.steps.zipper",
-        "--hidden-import", "zoneinfo",
-        "--hidden-import", "ntplib",
-    ]
-    
-    # Add icon if exists
-    if os.path.exists(icon_path):
-        cmd.extend(["--icon", icon_path])
-        
-    cmd.append(main_script)
-    
-    print(f"Running: {' '.join(cmd)}")
-    subprocess.check_call(cmd)
-    
-    app_path = os.path.join("dist", "Tayberry Backup Studio.app")
-    if os.path.exists(app_path):
-        print(f"Success! App created at: {os.path.abspath(app_path)}")
-        create_dmg(app_path)
-    else:
-        print("Build failed: App bundle not found in dist/")
+    # 1. Copy app source into Resources/app_src
+    src_app = ROOT / "app"
+    dst_app = resources_dir / "app_src"
+    shutil.copytree(src_app, dst_app,
+                    ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "*.pyo"))
+
+    # 2. Copy icon
+    icon_src = src_app / "resources" / "icon.icns"
+    if icon_src.exists():
+        shutil.copy2(icon_src, resources_dir / "AppIcon.icns")
+
+    # 3. Shell launcher
+    launcher = macos_dir / EXECUTABLE
+    launcher.write_text(
+        "#!/bin/bash\n"
+        "# Tayberry Backup Studio launcher\n"
+        'SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"\n'
+        'RESOURCES_DIR="$SCRIPT_DIR/../Resources"\n'
+        'cd "$RESOURCES_DIR"\n'
+        f'exec {PYTHON_BIN} -m {MODULE} "$@"\n'
+    )
+    launcher.chmod(0o755)
+
+    # 4. Info.plist
+    (BUNDLE / "Contents" / "Info.plist").write_text(
+        f"""<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key>
+    <string>{APP_NAME}</string>
+    <key>CFBundleDisplayName</key>
+    <string>{APP_NAME}</string>
+    <key>CFBundleIdentifier</key>
+    <string>{BUNDLE_ID}</string>
+    <key>CFBundleVersion</key>
+    <string>{APP_VERSION}</string>
+    <key>CFBundleShortVersionString</key>
+    <string>{APP_VERSION}</string>
+    <key>CFBundleExecutable</key>
+    <string>{EXECUTABLE}</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+    <key>NSRequiresAquaSystemAppearance</key>
+    <false/>
+    <key>LSMinimumSystemVersion</key>
+    <string>10.15</string>
+</dict>
+</plist>
+""")
+
+    # 5. PkgInfo
+    (BUNDLE / "Contents" / "PkgInfo").write_bytes(b"APPL????")
+
+    print(f"  Built:  {BUNDLE}")
+    return BUNDLE
+
+
+def install(bundle: Path):
+    dest = Path("/Applications") / APP_BUNDLE
+    if dest.exists():
+        shutil.rmtree(dest)
+    shutil.copytree(bundle, dest)
+    # Register with LaunchServices
+    lsreg = ("/System/Library/Frameworks/CoreServices.framework"
+             "/Versions/A/Frameworks/LaunchServices.framework"
+             "/Versions/A/Support/lsregister")
+    subprocess.run([lsreg, "-f", str(dest)], check=False)
+    print(f"  Installed → {dest}")
+
+
+def make_dmg(bundle: Path):
+    dmg = ROOT / "TayberryBackupStudio.dmg"
+    staging = ROOT / "_dmg_staging"
+    if staging.exists():
+        shutil.rmtree(staging)
+    staging.mkdir()
+    shutil.copytree(bundle, staging / APP_BUNDLE)
+    (staging / "Applications").symlink_to("/Applications")
+    if dmg.exists():
+        dmg.unlink()
+    subprocess.check_call([
+        "hdiutil", "create",
+        "-volname", f"{APP_NAME} Installer",
+        "-srcfolder", str(staging),
+        "-ov", "-format", "UDZO",
+        str(dmg),
+    ])
+    shutil.rmtree(staging)
+    print(f"  DMG:    {dmg}")
+
 
 if __name__ == "__main__":
-    # Ensure we are in the project root
-    # script_dir = os.path.dirname(os.path.abspath(__file__))
-    # os.chdir(script_dir)
-        
-    build()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--install", action="store_true", help="Also install to /Applications")
+    parser.add_argument("--dmg",     action="store_true", help="Also create a DMG")
+    args = parser.parse_args()
+
+    clean()
+    bundle = build()
+
+    if args.install:
+        install(bundle)
+    if args.dmg:
+        make_dmg(bundle)
+
+    if not args.install and not args.dmg:
+        # Default: install
+        install(bundle)
+
+    print("\nDone! Launch 'Tayberry Backup Studio' from Launchpad or Spotlight.")
