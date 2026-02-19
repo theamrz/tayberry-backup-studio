@@ -13,7 +13,7 @@ import subprocess
 
 def create_dmg(app_path):
     """Create a DMG from the .app bundle."""
-    dmg_name = "LiquidGlassDemo.dmg"
+    dmg_name = "TayberryBackupStudio.dmg"
     print(f"Creating {dmg_name}...")
     
     # Create a temporary folder to prepare the DMG content
@@ -37,7 +37,7 @@ def create_dmg(app_path):
     try:
         subprocess.check_call([
             "hdiutil", "create",
-            "-volname", "Liquid Glass Demo Installer",
+            "-volname", "Tayberry Backup Studio Installer",
             "-srcfolder", dmg_source,
             "-ov",
             "-format", "UDZO",
@@ -62,7 +62,7 @@ def build():
         print("Please run: pip install pyinstaller")
         sys.exit(1)
 
-    print("Building Liquid Glass Demo.app...")
+    print("Building Tayberry Backup Studio.app...")
     
     # Clean previous builds
     if os.path.exists("dist"):
@@ -90,11 +90,22 @@ def build():
         "--noconfirm",
         "--clean",
         "--windowed",  # No console window
-        "--name", "Liquid Glass Demo",
+        "--name", "Tayberry Backup Studio",
         "--add-data", f"{resources_path}:app/resources",  # Include resources folder
         "--hidden-import", "PyQt6.QtCore",
         "--hidden-import", "PyQt6.QtGui",
         "--hidden-import", "PyQt6.QtWidgets",
+        "--hidden-import", "app.backup_core.engine",
+        "--hidden-import", "app.backup_core.config",
+        "--hidden-import", "app.backup_core.scanning",
+        "--hidden-import", "app.backup_core.steps.api_bundles",
+        "--hidden-import", "app.backup_core.steps.code_bundles",
+        "--hidden-import", "app.backup_core.steps.configs",
+        "--hidden-import", "app.backup_core.steps.paths",
+        "--hidden-import", "app.backup_core.steps.root_files",
+        "--hidden-import", "app.backup_core.steps.zipper",
+        "--hidden-import", "zoneinfo",
+        "--hidden-import", "ntplib",
     ]
     
     # Add icon if exists
@@ -106,7 +117,7 @@ def build():
     print(f"Running: {' '.join(cmd)}")
     subprocess.check_call(cmd)
     
-    app_path = os.path.join("dist", "Liquid Glass Demo.app")
+    app_path = os.path.join("dist", "Tayberry Backup Studio.app")
     if os.path.exists(app_path):
         print(f"Success! App created at: {os.path.abspath(app_path)}")
         create_dmg(app_path)
