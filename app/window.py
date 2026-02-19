@@ -7,9 +7,9 @@ Connects the Galaxy background, Glass surfaces, and controls.
 Author: Amirhosein Rezapour | techili.ir | tayberry.ir | tayberry.dev
 """
 
-from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QHBoxLayout, QLabel, QFrame
+from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QHBoxLayout, QLabel, QFrame, QWidget
 from PyQt6.QtCore import Qt, QSize, QTimer
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QPixmap, QAction
 
 from .widgets.galaxy_background import GalaxyBackgound
 from .widgets.glass_surface import GlassSurface
@@ -20,7 +20,7 @@ from .widgets.fluid_glass import FluidInput, FluidGlassButton
 class LiquidWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Liquid Glass Demo - techili.ir")
+        self.setWindowTitle("TBcms Backup Studio - Liquid Edition")
         self.resize(1200, 800)
         self.setMinimumSize(1000, 700)
         
@@ -28,62 +28,80 @@ class LiquidWindow(QMainWindow):
         self.background = GalaxyBackgound(self)
         self.setCentralWidget(self.background)
         
+        # Top-Left Logo Branding
+        self.logo_brand = QLabel(self.background)
+        logo_pix = QPixmap("app/resources/logo.png")
+        if not logo_pix.isNull():
+            scaled_logo = logo_pix.scaled(80, 80, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+            self.logo_brand.setPixmap(scaled_logo)
+            self.logo_brand.move(40, 40)
+            
+            # Add Brand Name next to logo
+            self.brand_text = QLabel("TBcms Backup Studio", self.background)
+            self.brand_text.setStyleSheet("color: rgba(255, 255, 255, 0.8); font-size: 24px; font-weight: bold; font-family: 'Segoe UI', sans-serif;")
+            self.brand_text.move(130, 65)
+
         # 2. Main Glass Card (Floating Center)
-        self.card = GlassSurface(self.background, blur_radius=30, frost_opacity=0.1)
-        self.card.setFixedSize(400, 500)
+        self.card = GlassSurface(self.background, blur_radius=40, frost_opacity=0.15)
+        self.card.setFixedSize(500, 600)
         
         # Card Layout
         card_layout = QVBoxLayout(self.card)
-        card_layout.setContentsMargins(40, 40, 40, 40)
-        card_layout.setSpacing(20)
+        card_layout.setContentsMargins(50, 50, 50, 50)
+        card_layout.setSpacing(25)
         
+        # Center Logo
+        center_logo = QLabel()
+        if not logo_pix.isNull():
+            center_logo.setPixmap(logo_pix.scaled(120, 120, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
+        center_logo.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        card_layout.addWidget(center_logo)
+
         # Title
-        title = QLabel("Liquid Glass")
-        title.setStyleSheet("color: white; font-size: 32px; font-weight: bold; font-family: 'Segoe UI', sans-serif;")
+        title = QLabel("Backup Operations")
+        title.setStyleSheet("color: white; font-size: 28px; font-weight: bold;")
         title.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
-        subtitle = QLabel("A PyQt6 Concept by Amirhosein Rezapour")
-        subtitle.setStyleSheet("color: #aaa; font-size: 14px; font-style: italic;")
-        subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
         card_layout.addWidget(title)
+        
+        subtitle = QLabel("Select an action below")
+        subtitle.setStyleSheet("color: rgba(255, 255, 255, 0.6); font-size: 14px;")
+        subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
         card_layout.addWidget(subtitle)
+        
         card_layout.addSpacing(20)
         
-        # Inputs
-        self.input1 = FluidInput("Email Address")
-        self.input2 = FluidInput("Password")
-        self.input2.setEchoMode(FluidInput.EchoMode.Password)
+        # Inputs (Mock Project Selection)
+        self.project_input = FluidInput("Select Project Path...")
+        card_layout.addWidget(self.project_input)
         
-        card_layout.addWidget(self.input1)
-        card_layout.addWidget(self.input2)
-        card_layout.addSpacing(30)
-        
-        # Buttons
+        card_layout.addSpacing(10)
+
+        # Action Buttons
+        # Row 1: Primary Actions
         btn_row = QHBoxLayout()
-        self.btn_primary = StarBorderButton("Login")
-        self.btn_secondary = FluidGlassButton("Forgot?")
         
-        # Just center align these or stack them? Let's stack them for mobile feel or row.
-        # Given fixed size, let's stack.
-        # Actually row looks better if they fit.
-        # But StarBorder is fixed 200px wide. FluidGlass is 160. 
-        # 400 total width - 80 margin = 320 available. They won't fit side-by-side.
-        # Stack them.
+        self.btn_diff = StarBorderButton("Diff Check")
+        self.btn_backup = StarBorderButton("Write Backup")
         
-        # Re-layout
-        h_center1 = QHBoxLayout()
-        h_center1.addStretch()
-        h_center1.addWidget(self.btn_primary)
-        h_center1.addStretch()
+        # Adjust button styles if needed, or just let them be consistent
+        btn_row.addWidget(self.btn_diff)
+        btn_row.addSpacing(20)
+        btn_row.addWidget(self.btn_backup)
         
-        h_center2 = QHBoxLayout()
-        h_center2.addStretch()
-        h_center2.addWidget(self.btn_secondary)
-        h_center2.addStretch()
+        card_layout.addLayout(btn_row)
         
-        card_layout.addLayout(h_center1)
-        card_layout.addLayout(h_center2)
+        # Row 2: Secondary / Quick
+        btn_row_2 = QHBoxLayout()
+        self.btn_settings = FluidGlassButton("Settings")
+        self.btn_sync = FluidGlassButton("Cloud Sync")
+        
+        btn_row_2.addWidget(self.btn_settings)
+        btn_row_2.addSpacing(10)
+        btn_row_2.addWidget(self.btn_sync)
+        
+        card_layout.addSpacing(10)
+        card_layout.addLayout(btn_row_2)
+
         card_layout.addStretch()
         
         # 3. Control Pill (Floating Top-Right)

@@ -95,10 +95,17 @@ class GalaxyBackgound(QWidget):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
         
-        # Draw Background (Deep Space)
-        painter.fillRect(self.rect(), QColor(5, 5, 20)) # Very dark blue/black
+        # Draw Background (Pro Gradient)
+        # Create a deep, professional linear gradient
+        gradient = QLinearGradient(0, 0, self.width(), self.height())
+        gradient.setColorAt(0.0, QColor(10, 20, 40))   # Deep midnight blue
+        gradient.setColorAt(0.4, QColor(20, 10, 30))   # Dark purple tint
+        gradient.setColorAt(0.8, QColor(5, 5, 20))     # Almost black
+        gradient.setColorAt(1.0, QColor(0, 0, 0))      # Black
         
-        mx = self.mouse_pos.x()
+        painter.fillRect(self.rect(), QBrush(gradient))
+        
+        mx = self.mouse_pos.x() if hasattr(self, 'mouse_pos') else 0
         my = self.mouse_pos.y()
         cx = self.width() / 2
         cy = self.height() / 2

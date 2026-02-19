@@ -1,61 +1,61 @@
-# TBcms Liquid Glass Demo
+# Tayberry Backup Studio - Liquid Glass Edition 🌌
 
-A high-performance PyQt6 desktop application showcasing "Liquid Glass" UI design.
-This project implements advanced UI rendering techniques including blurred glass, galaxy particle simulations, and fluid refractive interfaces, all within a standard Python desktop environment.
+[Tayberry Backup Studio](app/resources/logo.png)
 
-**Author:** Amirhosein Rezapour
-**Web:** [techili.ir](https://techili.ir) | [tayberry.ir](https://tayberry.ir) | [tayberry.dev](https://tayberry.dev)
+## Overview
 
-## Features
+**Tayberry Backup Studio (Liquid Edition)** is a next-generation backup management interface designed with a focus on modern aesthetics, fluid user experience, and robust functionality. Built using **Python 3.9+** and **PyQt6**, it features a fully custom-painted UI engine that renders real-time glassmorphism, particle simulations, and advanced gradient composites.
 
-- **Galaxy Background**: Animated particle simulation with nebulae and parallax depth.
-- **Liquid Glass Surface**: Real-time background blur, frost, and edge lighting effects.
-- **Fluid Interactions**: Elastic mouse tracking and hover states.
-- **Star Border**: Custom animated gradient borders.
-- **Adaptive Performance**: Automatic quality adjustments based on frame rate.
+### Key Features 🚀
 
-## Requirements
+-   **Liquid Glass UI Engine**: A custom rendering pipeline using `QPainter` for real-time blur, noise, and light diffusion.
+-   **Galaxy Particle Simulation**: Interactive background with parallax starfields and nebulae.
+-   **Smart Backup & Diff**: Integrated tools for project state comparison ("Diff Check") and secure data archiving ("Write Backup").
+-   **Cross-Platform**: Optimized for macOS (with native .app/.dmg support) and Windows.
+-   **Fluid Controls**: Custom-built input fields and buttons with animated state transitions.
 
-- Python 3.11+
-- PyQt6
-- numpy (for fast particle math)
-- Pillow (for texture generation)
+## Installation 🛠️
 
-## Installation
+### Prerequisites
 
-1.  **Clone the repository:**
+-   Python 3.9 or higher
+-   PyQt6
+
+### Quick Start
+
+1.  **Clone the Repository**
     ```bash
-    git clone https://github.com/yourusername/liquid-glass-demo.git
-    cd liquid-glass-demo
+    git clone https://github.com/theamrz/tayberry-backup-studio.git
+    cd tayberry-backup-studio
     ```
 
-2.  **Create a virtual environment (recommended):**
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-    ```
-
-3.  **Install dependencies:**
+2.  **Install Dependencies**
     ```bash
     pip install -r requirements.txt
     ```
 
-## Usage
+3.  **Run the Application**
+    ```bash
+    python3 -m app.main
+    ```
 
-Run the application:
+## Building for macOS 🍎
+
+To create a standalone `.app` bundle and `.dmg` installer:
 
 ```bash
-python -m app.main
+python3 build_mac_app.py
 ```
+This will generate `Liquid Glass Demo.app` in the `dist/` directory and a mountable `LiquidGlassDemo.dmg` in the project root.
 
-## Performance Controls
+## Architecture 🏗️
 
-The application includes a floating control pill to tweak rendering parameters:
-- **Blur**: Adjust the strength of the glass blur effect.
-- **Refraction**: Control the liquid distortion strength.
-- **Frost**: Add noise/grain to the glass.
-- **Performance Mode**: Switch between CPU/GPU render paths (if available).
+The application uses a component-based architecture:
+-   **`GlassSurface`**: Core widget handling frosted glass effects using `QGraphicsEffect` and painter composition.
+-   **`GalaxyBackground`**: Handles the infinite loop animation loop for the background particles.
+-   **`LiquidWindow`**: The central orchestrator managing layout and state.
 
 ## License
 
-MIT License. See LICENSE for details.
+Copyright © 2026 **Amirhosein Rezapour** (Techili / Tayberry). All rights reserved.
+Startups and Enterprise solutions by [Techili.ir](https://techili.ir).
