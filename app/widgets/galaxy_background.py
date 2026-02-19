@@ -12,7 +12,7 @@ import random
 import time
 from PyQt6.QtWidgets import QWidget
 from PyQt6.QtCore import Qt, QTimer, QPointF
-from PyQt6.QtGui import QPainter, QColor, QRadialGradient, QBrush, QPixmap, QImage, QPen
+from PyQt6.QtGui import QPainter, QColor, QRadialGradient, QLinearGradient, QBrush, QPixmap, QImage, QPen
 
 class Nebula:
     def __init__(self, color, center, radius, drift):

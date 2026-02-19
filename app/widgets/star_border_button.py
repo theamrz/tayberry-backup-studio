@@ -50,7 +50,7 @@ class StarBorderButton(QPushButton):
         grad_rect = QRectF(0, 0, side, side)
         grad_rect.moveCenter(QPointF(rect.center()))
         
-        gradient = QConicalGradient(rect.center(), self.angle)
+        gradient = QConicalGradient(QPointF(rect.center()), self.angle)
         gradient.setColorAt(0.0, QColor("#00FFFF")) # Cyan
         gradient.setColorAt(0.25, Qt.GlobalColor.transparent)
         gradient.setColorAt(0.5, QColor("#FF00FF")) # Magenta

@@ -1,0 +1,482 @@
+{
+  "projects": [
+    {
+      "id": "aimodule",
+      "label": "AiModule",
+      "project_root": "/Volumes/Code/TBcms/Project/AiModule",
+      "backup_root": "/Volumes/Code/backup/AiModule",
+      "zip_output_dir": "/Volumes/Code/backup/AiModule/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "avidabime",
+      "label": "AvidaBime",
+      "project_root": "/Volumes/Code/TBcms/Project/AvidaBime",
+      "backup_root": "/Volumes/Code/backup/AvidaBime",
+      "zip_output_dir": "/Volumes/Code/backup/AvidaBime/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "aibonyad2",
+      "label": "AiBonyad2",
+      "project_root": "/Volumes/Code/TBcms/Project/Bonyad/AiBonyad2",
+      "backup_root": "/Volumes/Code/backup/AiBonyad2",
+      "zip_output_dir": "/Volumes/Code/backup/AiBonyad2/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "alavi-amlaktasarofi",
+      "label": "Alavi-amlakTasarofi",
+      "project_root": "/Volumes/Code/TBcms/Project/Bonyad/Alavi-amlakTasarofi",
+      "backup_root": "/Volumes/Code/backup/Alavi-amlakTasarofi",
+      "zip_output_dir": "/Volumes/Code/backup/Alavi-amlakTasarofi/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "erja",
+      "label": "erja",
+      "project_root": "/Volumes/Code/TBcms/Project/Bonyad/erja",
+      "backup_root": "/Volumes/Code/backup/erja",
+      "zip_output_dir": "/Volumes/Code/backup/erja/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "monaghese",
+      "label": "MonaGhese",
+      "project_root": "/Volumes/Code/TBcms/Project/Bonyad/MonaGhese",
+      "backup_root": "/Volumes/Code/backup/MonaGhese",
+      "zip_output_dir": "/Volumes/Code/backup/MonaGhese/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "taavoni",
+      "label": "taavoni",
+      "project_root": "/Volumes/Code/TBcms/Project/Bonyad/taavoni",
+      "backup_root": "/Volumes/Code/backup/taavoni",
+      "zip_output_dir": "/Volumes/Code/backup/taavoni/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "cdtweb",
+      "label": "CDTWEB",
+      "project_root": "/Volumes/Code/TBcms/Project/CDTWEB/CDTWEB",
+      "backup_root": "/Volumes/Code/backup/CDTWEB",
+      "zip_output_dir": "/Volumes/Code/backup/CDTWEB/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "pycdtweb",
+      "label": "PyCDTWEB",
+      "project_root": "/Volumes/Code/TBcms/Project/CDTWEB/PyCDTWEB",
+      "backup_root": "/Volumes/Code/backup/PyCDTWEB",
+      "zip_output_dir": "/Volumes/Code/backup/PyCDTWEB/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "cmshrcrm",
+      "label": "CMSHRCRM",
+      "project_root": "/Volumes/Code/TBcms/Project/CMSHRCRM",
+      "backup_root": "/Volumes/Code/backup/CMSHRCRM",
+      "zip_output_dir": "/Volumes/Code/backup/CMSHRCRM/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "dayyani",
+      "label": "dayyani",
+      "project_root": "/Volumes/Code/TBcms/Project/dayyani",
+      "backup_root": "/Volumes/Code/backup/dayyani",
+      "zip_output_dir": "/Volumes/Code/backup/dayyani/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "faynex",
+      "label": "FAYNEX",
+      "project_root": "/Volumes/Code/TBcms/Project/FAYNEX",
+      "backup_root": "/Volumes/Code/backup/FAYNEX",
+      "zip_output_dir": "/Volumes/Code/backup/FAYNEX/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "saas-ui-nextjs-landing-page-main",
+      "label": "Saas-ui-nextjs-landing-page-main",
+      "project_root": "/Volumes/Code/TBcms/Project/Saas-ui-nextjs-landing-page-main",
+      "backup_root": "/Volumes/Code/backup/Saas-ui-nextjs-landing-page-main",
+      "zip_output_dir": "/Volumes/Code/backup/Saas-ui-nextjs-landing-page-main/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "sahand",
+      "label": "Sahand",
+      "project_root": "/Volumes/Code/TBcms/Project/Sahand",
+      "backup_root": "/Volumes/Code/backup/Sahand",
+      "zip_output_dir": "/Volumes/Code/backup/Sahand/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "shinerepublic",
+      "label": "ShineRepublic",
+      "project_root": "/Volumes/Code/TBcms/Project/ShineRepublic",
+      "backup_root": "/Volumes/Code/backup/ShineRepublic",
+      "zip_output_dir": "/Volumes/Code/backup/ShineRepublic/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "tamingasalborz",
+      "label": "TaminGasAlborz",
+      "project_root": "/Volumes/Code/TBcms/Project/TaminGasAlborz",
+      "backup_root": "/Volumes/Code/backup/TaminGasAlborz",
+      "zip_output_dir": "/Volumes/Code/backup/TaminGasAlborz/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "taskmanager",
+      "label": "TaskManager",
+      "project_root": "/Volumes/Code/TBcms/Project/TaskManager",
+      "backup_root": "/Volumes/Code/backup/TaskManager",
+      "zip_output_dir": "/Volumes/Code/backup/TaskManager/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "tayberry.dev",
+      "label": "tayberry.dev",
+      "project_root": "/Volumes/Code/TBcms/Project/tayberry.dev",
+      "backup_root": "/Volumes/Code/backup/tayberry.dev",
+      "zip_output_dir": "/Volumes/Code/backup/tayberry.dev/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "tayberrycms",
+      "label": "TayBerryCMS",
+      "project_root": "/Volumes/Code/TBcms/Project/TayBerryCMS",
+      "backup_root": "/Volumes/Code/backup/TayBerryCMS",
+      "zip_output_dir": "/Volumes/Code/backup/TayBerryCMS/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "tbaichatbot",
+      "label": "TbAiChatBot",
+      "project_root": "/Volumes/Code/TBcms/Project/TbAiChatBot",
+      "backup_root": "/Volumes/Code/backup/TbAiChatBot",
+      "zip_output_dir": "/Volumes/Code/backup/TbAiChatBot/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "tbcmsmvp",
+      "label": "TBCMSMVP",
+      "project_root": "/Volumes/Code/TBcms/Project/TBCMSMVP",
+      "backup_root": "/Volumes/Code/backup/TBCMSMVP",
+      "zip_output_dir": "/Volumes/Code/backup/TBCMSMVP/zips",
+      "timezone": "Asia/Tehran"
+    },
+    {
+      "id": "zarinpakhshbelak",
+      "label": "ZarinPakhshBelak",
+      "project_root": "/Volumes/Code/TBcms/Project/ZarinPakhshBelak",
+      "backup_root": "/Volumes/Code/backup/ZarinPakhshBelak",
+      "zip_output_dir": "/Volumes/Code/backup/ZarinPakhshBelak/zips",
+      "timezone": "Asia/Tehran"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "full",
+      "label": "Full backup",
+      "use_network_time": true,
+      "skip_zip": false,
+      "max_file_kb": 256,
+      "include_steps": [
+        "trees",
+        "code_txt",
+        "ts_tsx_md_bundles",
+        "full_ts_tsx_bundle",
+        "configs",
+        "tsconfig_bundle",
+        "api_group_bundles",
+        "paths",
+        "keyword_search"
+      ]
+    },
+    {
+      "id": "quick",
+      "label": "Quick backup (no ZIP, trees + TS bundles only)",
+      "use_network_time": false,
+      "skip_zip": true,
+      "max_file_kb": 128,
+      "include_steps": [
+        "trees",
+        "ts_tsx_md_bundles",
+        "paths"
+      ],
+      "no_root_files": true
+    },
+    {
+      "id": "typescript_only",
+      "label": "TypeScript/TSX Only",
+      "use_network_time": false,
+      "skip_zip": true,
+      "max_file_kb": 256,
+      "include_steps": [
+        "trees",
+        "full_ts_tsx_bundle"
+      ],
+      "allowed_ts_extensions": [
+        ".ts",
+        ".tsx"
+      ],
+      "no_root_files": true
+    },
+    {
+      "id": "python_only",
+      "label": "Python Only",
+      "use_network_time": false,
+      "skip_zip": true,
+      "max_file_kb": 256,
+      "include_steps": [
+        "trees",
+        "code_txt"
+      ],
+      "allowed_full_extensions": [
+        ".py",
+        ".pyi",
+        ".json",
+        ".yaml",
+        ".yml",
+        ".toml"
+      ],
+      "no_root_files": true
+    },
+    {
+      "id": "frontend_focus",
+      "label": "Frontend Focus (React/Vue/Angular)",
+      "use_network_time": false,
+      "skip_zip": false,
+      "max_file_kb": 256,
+      "include_steps": [
+        "trees",
+        "code_txt",
+        "ts_tsx_md_bundles"
+      ],
+      "allowed_full_extensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx",
+        ".vue",
+        ".svelte",
+        ".css",
+        ".scss",
+        ".html"
+      ]
+    },
+    {
+      "id": "backend_focus",
+      "label": "Backend Focus (NestJS/Express)",
+      "use_network_time": false,
+      "skip_zip": false,
+      "max_file_kb": 256,
+      "include_steps": [
+        "trees",
+        "code_txt",
+        "api_group_bundles",
+        "configs"
+      ],
+      "allowed_full_extensions": [
+        ".ts",
+        ".js",
+        ".json",
+        ".yaml",
+        ".yml",
+        ".env"
+      ]
+    },
+    {
+      "id": "configs_only",
+      "label": "Config Files Only",
+      "use_network_time": false,
+      "skip_zip": true,
+      "max_file_kb": 128,
+      "include_steps": [
+        "configs",
+        "tsconfig_bundle"
+      ],
+      "no_root_files": false
+    }
+  ],
+  "search_sets": [
+    {
+      "id": "auth",
+      "label": "Auth-related keywords",
+      "keywords": [
+        "auth",
+        "login",
+        "token",
+        "jwt",
+        "session",
+        "password"
+      ],
+      "extensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx"
+      ]
+    },
+    {
+      "id": "payments",
+      "label": "Payments / checkout",
+      "keywords": [
+        "payment",
+        "stripe",
+        "checkout",
+        "invoice",
+        "billing"
+      ],
+      "extensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx"
+      ]
+    },
+    {
+      "id": "api_endpoints",
+      "label": "API Endpoints",
+      "keywords": [
+        "@Get",
+        "@Post",
+        "@Put",
+        "@Delete",
+        "@Patch",
+        "router.",
+        "app.get",
+        "app.post"
+      ],
+      "extensions": [
+        ".ts",
+        ".js"
+      ]
+    },
+    {
+      "id": "database",
+      "label": "Database Operations",
+      "keywords": [
+        "prisma",
+        "mongoose",
+        "sequelize",
+        "typeorm",
+        "knex",
+        "findMany",
+        "findOne",
+        "create",
+        "update",
+        "delete"
+      ],
+      "extensions": [
+        ".ts",
+        ".js"
+      ]
+    },
+    {
+      "id": "hooks",
+      "label": "React Hooks",
+      "keywords": [
+        "useState",
+        "useEffect",
+        "useCallback",
+        "useMemo",
+        "useRef",
+        "useContext",
+        "useReducer"
+      ],
+      "extensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx"
+      ]
+    }
+  ],
+  "extension_groups": {
+    "typescript": [
+      ".ts",
+      ".tsx"
+    ],
+    "javascript": [
+      ".js",
+      ".jsx"
+    ],
+    "web_frontend": [
+      ".ts",
+      ".tsx",
+      ".js",
+      ".jsx",
+      ".vue",
+      ".svelte",
+      ".css",
+      ".scss",
+      ".html"
+    ],
+    "backend": [
+      ".ts",
+      ".js",
+      ".py",
+      ".go",
+      ".rs",
+      ".java"
+    ],
+    "python": [
+      ".py",
+      ".pyi"
+    ],
+    "config": [
+      ".json",
+      ".yaml",
+      ".yml",
+      ".toml",
+      ".env",
+      ".ini"
+    ],
+    "documentation": [
+      ".md",
+      ".mdx",
+      ".rst",
+      ".txt"
+    ],
+    "all_code": [
+      ".ts",
+      ".tsx",
+      ".js",
+      ".jsx",
+      ".py",
+      ".vue",
+      ".svelte",
+      ".go",
+      ".rs",
+      ".java",
+      ".kt",
+      ".rb"
+    ]
+  },
+  "exclude_folders_default": [
+    "node_modules",
+    ".next",
+    ".turbo",
+    "dist",
+    "build",
+    ".git",
+    ".cache",
+    "coverage",
+    ".output",
+    ".nx",
+    ".vercel",
+    ".expo",
+    ".vscode",
+    "tmp",
+    "__pycache__",
+    "venv",
+    ".venv",
+    ".idea",
+    "vendor",
+    "Pods"
+  ]
+}
